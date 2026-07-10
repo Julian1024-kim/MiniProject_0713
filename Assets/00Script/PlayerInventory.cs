@@ -45,7 +45,6 @@ public class PlayerInventory : MonoBehaviour
         }
         if (selectedPlantIds.Count >= maxSelectCount)
         {
-            Debug.Log("슬롯이 꽉 찼습니다.");
             return false;
         }
         selectedPlantIds.Add(plantId);
@@ -61,6 +60,26 @@ public class PlayerInventory : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= selectedPlantIds.Count) return;
         selectedPlantIds.RemoveAt(slotIndex);
+    }
+    public void ToggleSelectPlant(int plantId)
+    {
+        if (selectedPlantIds.Contains(plantId))
+        {
+            selectedPlantIds.Remove(plantId);
+            Debug.Log($"식물 {plantId} 선택 해제");
+        }
+        else
+        {
+            if (selectedPlantIds.Count < maxSelectCount)
+            {
+                selectedPlantIds.Add(plantId);
+                Debug.Log($"식물 {plantId} 선택 완료");
+            }
+            else
+            {
+                Debug.Log("최대 5개까지만 선택 가능합니다.");
+            }
+        }
     }
 
 }

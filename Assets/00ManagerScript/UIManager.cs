@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject ClearPanel;
     [SerializeField] GameObject StorePanel;
+    [SerializeField] GameObject PreparePanel;
     [SerializeField] Canvas UICanvas;
     [SerializeField] GameObject dim;
 
@@ -122,6 +123,14 @@ public class UIManager : MonoBehaviour
     {
         if (ClearPanel != null) ClearPanel.SetActive(false);
         if (StorePanel != null) StorePanel.SetActive(false);
+        if (PreparePanel != null) PreparePanel.SetActive(false);
+    }
+
+    public void OpenPreparePanel()
+    {
+        PreparePanel.SetActive(true);
+        ClearPanel.SetActive(false);
+        StorePanel.SetActive(false);
         dim.SetActive(false);
     }
 }

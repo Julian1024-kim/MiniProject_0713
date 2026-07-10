@@ -137,6 +137,12 @@ public class StageManager : MonoBehaviour
         {
             UIManager.instance.CloseAllPanels(); // 모든 UI(결과창, 상점) 닫기
         }
+        if (PlayerInventory.instance.selectedPlantIds.Count == 0)
+        {
+            Debug.Log("선택된 식물이 없습니다!");
+            return;
+        }
+        InGameCardManager.instance.SetupInGameCards();
 
         // 다음 스테이지 인덱스로 시작
         StartStage(currentStageIndex + 1);
