@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c40258d8db44394b86492a22f6d9d73, type: 3}
+  m_Name: Stage2Data
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  stageName: 
+  waves:
+  - waveName: Wave1
+    zombiePrefabs:
+    - {fileID: 5024439846770975732, guid: 22203a683ddcd5a47aa3fd3eb07d0c86, type: 3}
+    - {fileID: 5024439846770975732, guid: db745d0273265c64fbbb84ae37d7f2ce, type: 3}
+    count: 4
+    spawnInterval: 15
+    transitionToNight: 1
+    strongZombieInterval: 3
