@@ -18,8 +18,6 @@ public class GameDataManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // 풀링된 오브젝트가 OnEnable에서 바로 데이터를 조회할 수 있도록
-            // Start()가 아닌 Awake()에서 미리 로드해둔다.
             LoadPlantData();
             LoadZombieData();
         }
@@ -35,7 +33,7 @@ public class GameDataManager : MonoBehaviour
         plants.Clear();
         for (int i = 0; i < plantData.plantList.Count; i++)
         {
-            PlantInfo info = plantData.plantList[i].Clone(); // 원본 자체 복사 방지
+            PlantInfo info = plantData.plantList[i].Clone();
             plants[info.id] = info;
         }
     }
@@ -58,5 +56,9 @@ public class GameDataManager : MonoBehaviour
     public ZombieInfo GetZombieInfo(int id)
     {
         return zombies.GetValueOrDefault(id);
+    }
+    public List<PlantInfo> GetAllPlantInfos()
+    {
+        return new List<PlantInfo>(plants.Values);
     }
 }
