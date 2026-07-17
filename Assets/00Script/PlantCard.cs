@@ -9,14 +9,12 @@ public class PlantCard : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI nameText;
 
-    // 하단 바의 카드를 클릭했을 때 실행
     public void OnClickCard()
     {
         PlantInfo info = GameDataManager.instance.GetPlantInfo(plantId);
 
         if (info != null)
         {
-            // PlacementManager에게 정보와 프리팹을 전달
             PlacementManager.instance.SetSelectedPlant(info, plantPrefab);
             Debug.Log($"{info.name} 선택됨! 가격: {info.sunCost}");
         }

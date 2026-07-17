@@ -12,7 +12,8 @@ public class PlantInfo
     public float attackSpeed;  // 공격 주기(초)
     public int sunCost;        // 심는 데 필요한 태양 개수
     public float rechargeTime; // 재사용 대기시간(초)
-    public bool canAttack;     // 호두같은놈
+    public bool canAttack;     // 호두,체리폭탄용
+
 
     public PlantInfo(int id, string name, int health, int damage, float attackSpeed, int sunCost, float rechargeTime, bool canAttack)
     {

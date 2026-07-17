@@ -14,6 +14,8 @@ public class Plant : MonoBehaviour
     public float detectionRange = 10f; // 식물감지거리
     public LayerMask zombieLayer;
 
+    public Cell currentCell;
+
     private bool isZombieDetected = false;
 
     protected virtual void OnEnable()

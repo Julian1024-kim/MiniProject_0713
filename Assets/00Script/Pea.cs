@@ -9,7 +9,7 @@ public class Pea : MonoBehaviour
     {
         transform.Translate(Vector3.right * speed * Time.deltaTime);
 
-        if (transform.position.x > 15f)
+        if (transform.position.x > 18f)
         {
             gameObject.SetActive(false);
         }

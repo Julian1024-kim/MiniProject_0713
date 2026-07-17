@@ -68,6 +68,12 @@ public class BombPlant : Plant
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
+        if (currentCell != null)
+        {
+            currentCell.isOccupied = false;
+            currentCell.plantOnCell = null;
+            currentCell = null;
+        }
 
         gameObject.SetActive(false);
     }

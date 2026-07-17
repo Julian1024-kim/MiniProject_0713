@@ -32,20 +32,26 @@ public class StageManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
-    }
-
-    void Start()
+    }  
+    //void Start()
+    //
+    //{
+    //    if (currentWorld != null && currentWorld.stages.Count > 0)
+    //    {
+    //        StartStage(currentStageIndex);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("WorldData가 할당되지 않았거나 스테이지가 비어있습니다!");
+    //    }
+    //}
+    public void LoadAndStartStage(WorldData world,int stageIndex)
     {
-        if (currentWorld != null && currentWorld.stages.Count > 0)
-        {
-            StartStage(currentStageIndex);
-        }
-        else
-        {
-            Debug.LogError("WorldData가 할당되지 않았거나 스테이지가 비어있습니다!");
-        }
-    }
+        currentWorld = world;
+        currentStageIndex = stageIndex;
 
+        StartStage(stageIndex);
+    }
     public void StartStage(int index)
     {
         if (index < currentWorld.stages.Count)
@@ -144,7 +150,11 @@ public class StageManager : MonoBehaviour
         }
         InGameCardManager.instance.SetupInGameCards();
 
-        // 다음 스테이지 인덱스로 시작
+        GameObject[] plants = GameObject.FindGameObjectsWithTag("Plant");
+        foreach ( GameObject plant in plants)
+        {
+            plant.SetActive(false);
+        }
         StartStage(currentStageIndex + 1);
     }
 
@@ -167,7 +177,7 @@ public class StageManager : MonoBehaviour
             if (map != null)
             {
                 DOTween.To(() => map.color, x => map.color = x, targetColor, transitionDuration)
-                       .SetEase(Ease.InOutQuad);
+                       .SetEase(Ease.InOutQuad); // 두트윈 가속설정
             }
         }
     }

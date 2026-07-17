@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    [Header("패널들")]
     [SerializeField] GameObject PausePanel;
     [SerializeField] GameObject SoundPanel;
     [SerializeField] GameObject GameOverPanel;
@@ -13,8 +15,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject PreparePanel;
     [SerializeField] Canvas UICanvas;
     [SerializeField] GameObject dim;
+    [SerializeField] GameObject MainMenuPanel;
+    [SerializeField] GameObject StageSelectPanel;
 
     GameObject optionPanel;
+
+    [Header("스테이지 선택")]
+    [SerializeField] WorldData worldData;
+    [SerializeField] GameObject stageButtonPrefab;
+    [SerializeField] Transform buttonContainer;
 
     private void Awake()
     {
@@ -26,6 +35,12 @@ public class UIManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void Start()
+    {
+        GenerateStageButtons();
+        OpenMainMenu();
+    }
+
     void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -35,6 +50,36 @@ public class UIManager : MonoBehaviour
                 OpenOptionPanel();
             }
         }
+    }
+    public void GenerateStageButtons() // 버튼 여러개
+    {
+        foreach (Transform child in buttonContainer) Destroy(child.gameObject);
+
+        for (int i = 0; i < worldData.stages.Count; i++)
+        {
+            int index = i;
+            GameObject btnObj = Instantiate(stageButtonPrefab, buttonContainer);
+
+            var btnText = btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            if (btnText != null) btnText.text = $"Stage {index + 1}";
+
+            btnObj.GetComponent<Button>().onClick.AddListener(() => { OnStageButtonClicked(index); }); // 그냥쓰면 버튼생기면 바로실행됨
+        }
+    }
+    void OnStageButtonClicked(int index)
+    {
+            CloseAllPanels();
+        StageManager.instance.LoadAndStartStage(worldData, index);
+    }
+    public void OpenMainMenu()
+    {
+        CloseAllPanels();
+        MainMenuPanel.SetActive(true);
+    }
+    public void OpenSelectStage()
+    {
+        CloseAllPanels();
+        StageSelectPanel.SetActive(true);
     }
     public void OpenClearPanel()
     {
@@ -114,16 +159,14 @@ public class UIManager : MonoBehaviour
             GameOverPanel.transform.SetAsLastSibling();
         }
     }
-    public void OpenStoreFromClear()
-    {
-        ClearPanel.SetActive(false); // 결과창 끄고
-        OpenStorePanel();            // 상점창 열기
-    }
+  
     public void CloseAllPanels()
     {
         if (ClearPanel != null) ClearPanel.SetActive(false);
         if (StorePanel != null) StorePanel.SetActive(false);
         if (PreparePanel != null) PreparePanel.SetActive(false);
+        if (StageSelectPanel != null) StageSelectPanel.SetActive(false);
+        if (MainMenuPanel !=null) MainMenuPanel.SetActive(false);
     }
 
     public void OpenPreparePanel()

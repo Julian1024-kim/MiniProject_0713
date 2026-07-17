@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4705349423719677624}
   - component: {fileID: 7141337777275426459}
   - component: {fileID: -7658782625779133482}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wallnut
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -155,3 +155,8 @@ MonoBehaviour:
   health: 0
   fireRate: 0
   _canAttack: 0
+  detectionRange: 10
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  currentCell: {fileID: 0}

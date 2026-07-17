@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Wave
 {
     public string waveName;
-    public List<GameObject> zombiePrefabs; // [0]은 일반, [1]은 강화 좀비로 사용 권장
+    public List<GameObject> zombiePrefabs; // [0]은 일반, [1]은 강화 좀비
     public int count; // 소환할  좀비 총 마릿수
     public float spawnInterval;
     public bool transitionToNight;

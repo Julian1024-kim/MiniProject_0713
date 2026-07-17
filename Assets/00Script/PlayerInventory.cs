@@ -15,9 +15,12 @@ public class PlayerInventory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            InitDefaultPlants();
         }
         else Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
     }
 
     public bool BuyPlant(int plantId)
@@ -82,4 +85,23 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    void InitDefaultPlants()
+    {
+        List<int> defaultPlantID = new List<int>() { 1, 2 };
+
+
+        foreach (int id in defaultPlantID)
+        {
+            if (!ownedPlantIds.Contains(id))
+            {
+                ownedPlantIds.Add(id);
+            }
+
+            if (!selectedPlantIds.Contains(id))
+            {
+                selectedPlantIds.Add(id);
+            }
+        }
+
+    }
 }

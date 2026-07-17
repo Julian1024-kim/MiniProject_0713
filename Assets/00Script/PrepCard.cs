@@ -16,7 +16,6 @@ public class PrepCard : MonoBehaviour
         if (info != null)
         {
             nameText.text = info.name;
-            // iconImage.sprite = info.icon; // 데이터에 아이콘이 있다면 설정
         }
         RefreshUI();
     }
@@ -30,7 +29,6 @@ public class PrepCard : MonoBehaviour
 
     public void OnClickCard()
     {
-        // 이미 선택된 상태면 해제, 아니면 추가
         if (PlayerInventory.instance.selectedPlantIds.Contains(plantId))
         {
             PlayerInventory.instance.selectedPlantIds.Remove(plantId);

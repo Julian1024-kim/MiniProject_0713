@@ -10,7 +10,8 @@ public class PlacementManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
 
     public void SetSelectedPlant(PlantInfo info, GameObject prefab)
@@ -48,6 +49,7 @@ public class PlacementManager : MonoBehaviour
             if (plantScript != null)
             {
                 plantScript.plantId = selectedPlantData.id;
+                plantScript.currentCell = cell;
             }
 
             cell.isOccupied = true;

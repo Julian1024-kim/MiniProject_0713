@@ -1,16 +1,14 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PreparationManager : MonoBehaviour
 {
     public static PreparationManager instance;
 
-    [SerializeField] GameObject prepCardPrefab; // 준비용 카드 프리팹
-    [SerializeField] Transform contentParent;  // Scroll View의 Content
+    [SerializeField] GameObject prepCardPrefab;
+    [SerializeField] Transform contentParent;
 
     void Awake() => instance = this;
 
-    // 패널이 켜질 때마다 리스트를 새로고침
     void OnEnable()
     {
         RefreshList();
@@ -41,14 +39,10 @@ public class PreparationManager : MonoBehaviour
             return;
         }
 
-        // 하단 인게임 카드 생성 요청
         InGameCardManager.instance.SetupInGameCards();
-
-        // 준비 패널 끄기
         gameObject.SetActive(false);
     }
 
-    // 카드가 클릭됐을 때 모든 카드의 체크표시를 새로고침하기 위한 함수
     public void UpdateAllCards()
     {
         PrepCard[] cards = GetComponentsInChildren<PrepCard>();

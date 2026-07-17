@@ -6,7 +6,8 @@ public class SunManager : MonoBehaviour
 
     public int currentSun = 50;
 
-    void Awake() => instance = this;
+    void Awake() => 
+        instance = this;
 
     public void AddSun(int amount)
     {
