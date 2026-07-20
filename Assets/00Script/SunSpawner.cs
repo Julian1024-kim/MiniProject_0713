@@ -15,7 +15,7 @@ public class SunSpawner : MonoBehaviour
         StartCoroutine(SpawnSunRoutine());
     }
 
-    IEnumerator SpawnSunRoutine()
+    public IEnumerator SpawnSunRoutine()
     {
         yield return new WaitForSeconds(3f);
 
@@ -33,10 +33,11 @@ public class SunSpawner : MonoBehaviour
     void SpawnSun()
     {
         float randomX = Random.Range(-xRange, xRange);
+        float ramdomSpawnY = Random.Range(-2f, 4f);
         Vector3 spawnPos = new Vector3(randomX, ySpawnPos, 0);
 
-        ObjectPoolManager.instance.SpawnFromPool("Sun", spawnPos, Quaternion.identity);
-        Debug.Log("ÇÞºû »ý¼ºµÊ!");
+       GameObject sunObj = ObjectPoolManager.instance.SpawnFromPool("Sun", spawnPos, Quaternion.identity);
+        sunObj.GetComponent<Sun>().Initialize(transform.position.y, true);
     }
 
     public void SetNightMode(bool night)

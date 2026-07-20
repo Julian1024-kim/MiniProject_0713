@@ -87,7 +87,7 @@ public class PlayerInventory : MonoBehaviour
 
     void InitDefaultPlants()
     {
-        List<int> defaultPlantID = new List<int>() { 1, 2 };
+        List<int> defaultPlantID = new List<int>() { 1, 2,5 };
 
 
         foreach (int id in defaultPlantID)

@@ -6,6 +6,7 @@ public class Sun : MonoBehaviour
     public float dropSpeed = 2f;
     private float stopY;
     private Coroutine disableCoroutine;
+    private bool isFalling = true;
 
     void OnEnable()
     {
@@ -22,7 +23,7 @@ public class Sun : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y > stopY)
+        if (transform.position.y > stopY && isFalling)
         {
             transform.Translate(Vector3.down * dropSpeed * Time.deltaTime);
         }
@@ -47,6 +48,16 @@ public class Sun : MonoBehaviour
 
     void OnDisable()
     {
-        disableCoroutine = null;
+        isFalling = false;
+        StopAllCoroutines();
+    }
+
+    public void Initialize(float targetStopY,bool shouldFall)
+    {
+        stopY =targetStopY;
+        isFalling = shouldFall;
+
+        if (disableCoroutine != null) StopCoroutine(disableCoroutine);
+        disableCoroutine = StartCoroutine(AutoDisableRoutine(7f));
     }
 }
