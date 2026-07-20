@@ -45,3 +45,11 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 0
     canAttack: 0
+  - id: 5
+    name: SunFlower
+    health: 30
+    damage: 0
+    attackSpeed: 0
+    sunCost: 0
+    rechargeTime: 0
+    canAttack: 0

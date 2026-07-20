@@ -5637,6 +5637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   currentWorld: {fileID: 11400000, guid: 2b6a8eac12306054d80a814cbdfe924b, type: 2}
   currentStageIndex: 0
+  clearCoin: 100
+  bonusCoinPerStage: 50
   stageData: {fileID: 11400000, guid: 66c45176bab13fd43b2f6cb7e09c6a36, type: 2}
   sunSpawner: {fileID: 1619637545}
   gridTilemaps:
@@ -11084,6 +11086,9 @@ MonoBehaviour:
   - name: CherryBomb
     prefab: {fileID: 8246616912785614162, guid: 065a83a43c7586e42b1239a02b8ce645, type: 3}
     size: 10
+  - name: SunFlower
+    prefab: {fileID: 5130602855384141857, guid: 88c876fe513f59c489d56be9b306d4df, type: 3}
+    size: 30
 --- !u!4 &1716075778
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,11 @@ public class StageManager : MonoBehaviour
     public WorldData currentWorld;
     public int currentStageIndex = 0;
 
+    [Header("보상셋팅")]
+    public int clearCoin = 100;
+    public int bonusCoinPerStage = 50;
+
+
     [HideInInspector]
     public StageData stageData;
 
@@ -125,23 +130,33 @@ public class StageManager : MonoBehaviour
             Debug.Log($"스테이지 {currentStageIndex + 1} 클리어");
             yield return new WaitForSeconds(1.5f);
 
+            GiveClearReward();
             OpenClearResult();
+        }
+    }
+    void GiveClearReward()
+    {
+        int reward = clearCoin + (currentStageIndex * bonusCoinPerStage);
+
+        if (CoinManager.instance != null)
+        {
+            CoinManager.instance.AddCoins(reward);
         }
     }
 
     void OpenClearResult()
     {
-        Time.timeScale = 0; // 게임 일시정지
+        Time.timeScale = 0;
         if (UIManager.instance != null)
         {
-            UIManager.instance.OpenClearPanel(); // UIManager에 새로 만든 함수
+            UIManager.instance.OpenClearPanel();
         }
     }
     public void OnClickNextStageButton()
     {
         if (UIManager.instance != null)
         {
-            UIManager.instance.CloseAllPanels(); // 모든 UI(결과창, 상점) 닫기
+            UIManager.instance.CloseAllPanels();
         }
         if (PlayerInventory.instance.selectedPlantIds.Count == 0)
         {

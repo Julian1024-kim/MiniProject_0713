@@ -19,4 +19,7 @@ public class StageData : ScriptableObject
 {
     public string stageName;
     public List<Wave> waves;
+
+    public int stageIndex;
+    public int ClearCoin = 100;
 }
