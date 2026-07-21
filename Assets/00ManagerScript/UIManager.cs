@@ -125,7 +125,7 @@ public class UIManager : MonoBehaviour
     {
         if(storeCoinText != null && CoinManager.instance !=null)
         {
-            storeCoinText.text = CoinManager.instance.GetTotalCoins().ToString("NO");// ÄÞ¸¶³Ö±â
+            storeCoinText.text = CoinManager.instance.GetTotalCoins().ToString("N0");// ÄÞ¸¶³Ö±â
         }
     }
 
