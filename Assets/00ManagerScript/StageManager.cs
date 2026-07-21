@@ -61,6 +61,11 @@ public class StageManager : MonoBehaviour
     {
         if (index < currentWorld.stages.Count)
         {
+            if (GridManager.instance != null)
+            {
+                GridManager.instance.ResetAllCells(); //타일에 재설치안되는증상
+            }
+
             stageData = currentWorld.stages[index];
             currentStageIndex = index;
             isGameOver = false;
@@ -103,6 +108,8 @@ public class StageManager : MonoBehaviour
 
             Debug.Log($"{wave.waveName} 시작!");
 
+            yield return new WaitForSeconds(2f);
+
             for (int i = 0; i < wave.count; i++)
             {
                 if (isGameOver) yield break;
@@ -128,7 +135,7 @@ public class StageManager : MonoBehaviour
         if (!isGameOver)
         {
             Debug.Log($"스테이지 {currentStageIndex + 1} 클리어");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.1f);
 
             OpenClearResult();
         }
@@ -165,19 +172,31 @@ public class StageManager : MonoBehaviour
         {
             plant.SetActive(false);
         }
+        GameObject[] suns = GameObject.FindGameObjectsWithTag("Sun");
+        foreach (GameObject sun in suns)
+        {
+            sun.SetActive(false);
+        }
         StartStage(currentStageIndex + 1);
     }
 
     void ChangeToNight()
     {
         SetStageVisual(nightColor);
-        if (sunSpawner != null) sunSpawner.SetNightMode(true);
+        if (sunSpawner != null)
+        {
+            sunSpawner.SetNightMode(true);
+        }
     }
 
     void ChangeToDay()
     {
         SetStageVisual(Color.white);
-        if (sunSpawner != null) sunSpawner.SetNightMode(false);
+
+        if (sunSpawner != null)
+        {
+            sunSpawner.SetNightMode(false);
+        }
     }
 
     void SetStageVisual(Color targetColor)
@@ -210,4 +229,3 @@ public class StageManager : MonoBehaviour
             ObjectPoolManager.instance.SpawnFromPool(selectedZombie.name, spawnPos, Quaternion.identity);
     }
 }
-

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager instance;
 
     // 깃허브 확인용 주석
     [Header("그리드 설정")]
@@ -14,6 +15,16 @@ public class GridManager : MonoBehaviour
     public GameObject cellPrefab;
 
     public Cell[,] grid;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
@@ -38,6 +49,22 @@ public class GridManager : MonoBehaviour
 
                 // 배열에 저장
                 grid[x, y] = cellObj.GetComponent<Cell>();
+            }
+        }
+    }
+    public void ResetAllCells()
+    {
+        if (grid == null) return;
+
+        for (int x = 0; x < columns; x++)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                if (grid[x, y] != null)
+                {
+                    grid[x, y].isOccupied = false;
+                    grid[x, y].plantOnCell = null;
+                }
             }
         }
     }

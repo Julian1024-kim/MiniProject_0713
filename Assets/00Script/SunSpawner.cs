@@ -29,6 +29,10 @@ public class SunSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+    public void SetNightMode(bool night)
+    {
+        isNight = night;
+    }
 
     void SpawnSun()
     {
@@ -39,18 +43,4 @@ public class SunSpawner : MonoBehaviour
        GameObject sunObj = ObjectPoolManager.instance.SpawnFromPool("Sun", spawnPos, Quaternion.identity);
         sunObj.GetComponent<Sun>().Initialize(transform.position.y, true);
     }
-
-    public void SetNightMode(bool night)
-    {
-        isNight = night;
-    }
 }
-
-
-
-
-
-
-
-
-
