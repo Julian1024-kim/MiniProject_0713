@@ -130,11 +130,10 @@ public class StageManager : MonoBehaviour
             Debug.Log($"스테이지 {currentStageIndex + 1} 클리어");
             yield return new WaitForSeconds(1.5f);
 
-            GiveClearReward();
             OpenClearResult();
         }
     }
-    void GiveClearReward()
+    void OpenClearResult()
     {
         int reward = clearCoin + (currentStageIndex * bonusCoinPerStage);
 
@@ -142,15 +141,11 @@ public class StageManager : MonoBehaviour
         {
             CoinManager.instance.AddCoins(reward);
         }
-    }
-
-    void OpenClearResult()
-    {
-        Time.timeScale = 0;
-        if (UIManager.instance != null)
+        if(UIManager.instance != null)
         {
-            UIManager.instance.OpenClearPanel();
+            UIManager.instance.OpenClearPanel(reward);
         }
+        Time.timeScale = 0;
     }
     public void OnClickNextStageButton()
     {

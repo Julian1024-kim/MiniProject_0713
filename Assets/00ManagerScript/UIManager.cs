@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+using TMPro;
+using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject StageSelectPanel;
 
     GameObject optionPanel;
+
+    [Header("텍스트")]
+    [SerializeField] TextMeshProUGUI rewardCoinText;
+    [SerializeField] TextMeshProUGUI storeCoinText;
 
     [Header("스테이지 선택")]
     [SerializeField] WorldData worldData;
@@ -81,7 +86,7 @@ public class UIManager : MonoBehaviour
         CloseAllPanels();
         StageSelectPanel.SetActive(true);
     }
-    public void OpenClearPanel()
+    public void OpenClearPanel(int rewardAmount)
     {
         if (ClearPanel != null)
         {
@@ -90,6 +95,15 @@ public class UIManager : MonoBehaviour
             dim.transform.SetAsLastSibling();
             ClearPanel.transform.SetAsLastSibling();
             Time.timeScale = 0f;
+        }
+
+        if(rewardCoinText != null)
+        {
+            rewardCoinText.text = "+0 Coin GET!!";
+            int displayValue = 0;
+
+            DOTween.To(() => displayValue, x => displayValue = x, rewardAmount, 1.5f)
+            .OnUpdate(() => { rewardCoinText.text = "+" + displayValue.ToString(); }).SetUpdate(true).SetEase(Ease.OutQuad);
         }
     }
 
@@ -103,7 +117,15 @@ public class UIManager : MonoBehaviour
             dim.transform.SetAsLastSibling();
             StorePanel.transform.SetAsLastSibling();
 
+            UpdateStoreCoinUI();
             Time.timeScale = 0f;
+        }
+    }
+    public void UpdateStoreCoinUI()
+    {
+        if(storeCoinText != null && CoinManager.instance !=null)
+        {
+            storeCoinText.text = CoinManager.instance.GetTotalCoins().ToString("NO");// 콤마넣기
         }
     }
 

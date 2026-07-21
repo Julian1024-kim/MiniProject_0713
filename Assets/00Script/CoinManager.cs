@@ -1,4 +1,3 @@
-using UnityEditor.Overlays;
 using UnityEngine;
 
 public class CoinManager : MonoBehaviour
@@ -23,6 +22,11 @@ public class CoinManager : MonoBehaviour
     {
         totalCoins += amount;
         SaveData();
+
+        if(UIManager.instance != null)
+        {
+            UIManager.instance.UpdateStoreCoinUI();
+        }
     }
     public bool SpendCoins(int amount)
     {
@@ -30,6 +34,11 @@ public class CoinManager : MonoBehaviour
         {
             totalCoins -= amount;
             SaveData();
+
+            if(UIManager.instance !=null)
+            {
+                UIManager.instance.UpdateStoreCoinUI();
+            }
             return true;
         }
         else
