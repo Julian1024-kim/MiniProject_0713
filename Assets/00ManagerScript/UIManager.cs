@@ -34,14 +34,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject stageButtonPrefab;
     [SerializeField] Transform buttonContainer;
 
+    [Header("스피드")]
+    public TextMeshProUGUI speedBtnText;
+    private bool isFastSpeed = false;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
@@ -59,6 +61,24 @@ public class UIManager : MonoBehaviour
                 OpenOptionPanel();
             }
         }
+    }
+    public void GameSpeed()
+    {
+        if (Time.timeScale == 0 && !isFastSpeed) return;
+
+        isFastSpeed = !isFastSpeed;
+
+        if( isFastSpeed)
+        {
+            Time.timeScale = 2;
+            speedBtnText.text = "X2";
+        }
+        else
+        {
+            Time.timeScale = 1;
+            speedBtnText.text = "X1";
+        }
+
     }
     public void GenerateStageButtons() // 버튼 여러개
     {
