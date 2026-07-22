@@ -18,11 +18,10 @@ public class Pea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Zombie"))
         {
-            Zombie zombie = collision.gameObject.GetComponent<Zombie>();
-            if (zombie != null)
-            {
-                zombie.TakeDamage(damage);
-            }
+            
+                float finalDamage = damage * UpgradeManager.instance.GetAtkMultiplier();
+                collision.gameObject.GetComponent<Zombie>().TakeDamage(finalDamage);
+            
             gameObject.SetActive(false);
         }
     }

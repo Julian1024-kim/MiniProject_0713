@@ -46,7 +46,7 @@ public class BombPlant : Plant
 
         Collider2D[] zombiesInRange = Physics2D.OverlapBoxAll(transform.position, explosionSize, 0f, zombieLayer);
 
-        int damageValue = 0;
+        float damageValue = 0;
         PlantInfo info = GameDataManager.instance.GetPlantInfo(plantId);
         if (info != null) damageValue = info.damage;
 

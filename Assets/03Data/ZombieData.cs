@@ -10,8 +10,8 @@ public class ZombieInfo
     public int id;
     public string name;
     public ZombieType type;    // 좀비 유형 추가
-    public int health;         // 체력
-    public int damage;         // 공격력(씹는 데미지)
+    public float health;         // 체력
+    public float damage;         // 공격력(씹는 데미지)
     public float attackSpeed;  // 공격 주기(초)
     public float moveSpeed;    // 이동 속도
 
@@ -25,7 +25,7 @@ public class ZombieInfo
     public float rushDuration;
     public float rushInterval;
 
-    public ZombieInfo(int id, string name, ZombieType type, int health, int damage, float attackSpeed, float moveSpeed)
+    public ZombieInfo(int id, string name, ZombieType type, float health, float damage, float attackSpeed, float moveSpeed)
     {
         this.id = id;
         this.name = name;

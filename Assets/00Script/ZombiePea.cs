@@ -3,7 +3,7 @@ using UnityEngine;
 public class ZombiePea : MonoBehaviour
 {
     public float speed = 5f;
-    public int damage = 20;
+    public float damage = 20;
 
     void Update()
     {

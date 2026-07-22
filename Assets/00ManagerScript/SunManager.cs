@@ -4,7 +4,7 @@ public class SunManager : MonoBehaviour
 {
     public static SunManager instance;
 
-    public int currentSun = 50;
+    public float currentSun = 50;
 
     void Awake() => 
         instance = this;
@@ -15,7 +15,7 @@ public class SunManager : MonoBehaviour
         Debug.Log($"ÇöÀç ÇÞºû: {currentSun}");
     }
 
-    public bool UseSun(int amount)
+    public bool UseSun(float amount)
     {
         if (currentSun >= amount)
         {

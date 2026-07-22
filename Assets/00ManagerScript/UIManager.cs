@@ -21,9 +21,13 @@ public class UIManager : MonoBehaviour
 
     GameObject optionPanel;
 
-    [Header("텍스트")]
+    [Header("일반텍스트")]
     [SerializeField] TextMeshProUGUI rewardCoinText;
     [SerializeField] TextMeshProUGUI storeCoinText;
+
+    [Header("업그레이드텍스트")]
+    [SerializeField] TextMeshProUGUI atkUpgradeText;
+    [SerializeField] TextMeshProUGUI prodUpgradeText;
 
     [Header("스테이지 선택")]
     [SerializeField] WorldData worldData;
@@ -117,7 +121,7 @@ public class UIManager : MonoBehaviour
             dim.transform.SetAsLastSibling();
             StorePanel.transform.SetAsLastSibling();
 
-            UpdateStoreCoinUI();
+            UpdateStoreUI();
             Time.timeScale = 0f;
         }
     }
@@ -126,6 +130,43 @@ public class UIManager : MonoBehaviour
         if(storeCoinText != null && CoinManager.instance !=null)
         {
             storeCoinText.text = CoinManager.instance.GetTotalCoins().ToString("N0");// 콤마넣기
+        }
+    }
+    public void UpdateStoreUI()
+    {
+        UpdateStoreCoinUI();
+
+        if(UpgradeManager.instance != null)
+        {
+            if (atkUpgradeText != null)
+            {
+                int atkLv = UpgradeManager.instance.atkLevel;
+                int atkCost = UpgradeManager.instance.GetAtkUpgradeCost();
+                atkUpgradeText.text = $"Attack (Lv.{atkLv})\n<color=#FFD700>{atkCost:N0} Coin</color>";
+                Debug.Log("가격 갱신됨: " + atkCost);
+            }
+            if (prodUpgradeText != null)
+            {
+                int prodLv = UpgradeManager.instance.prodLevel;
+                int prodCost = UpgradeManager.instance.GetProdUpgradeCost();
+                prodUpgradeText.text = $"Prod (Lv.{prodLv})\n<color=#FFD700>{prodCost:N0} Coin</color>";
+            }
+        }
+    }
+    public void OnClickUpgradeAtk()
+    {
+        if(UpgradeManager.instance != null)
+        {
+            UpgradeManager.instance.UpgradeAtk();
+            UpdateStoreUI();
+        }
+    }
+    public void OnClickUpgradeProd()
+    {
+        if (UpgradeManager.instance != null)
+        {
+            UpgradeManager.instance.UpgradeProd();
+            UpdateStoreUI();
         }
     }
 
@@ -197,5 +238,14 @@ public class UIManager : MonoBehaviour
         ClearPanel.SetActive(false);
         StorePanel.SetActive(false);
         dim.SetActive(false);
+    }
+
+    public void ResetGameData()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        Debug.Log("모든데이터 초기화");
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

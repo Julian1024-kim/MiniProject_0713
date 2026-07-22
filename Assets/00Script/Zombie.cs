@@ -16,8 +16,8 @@ public class Zombie : MonoBehaviour
 
     // 공통 스탯
     public float speed;
-    public int health;
-    public int damage;
+    public float health;
+    public float damage;
     public float attackSpeed;
 
     // 특수 능력 스탯
@@ -185,7 +185,7 @@ public class Zombie : MonoBehaviour
 
         ChangeState(ZombieState.Walk);
     }
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
         if (health <= 0) ChangeState(ZombieState.Die);

@@ -6,7 +6,7 @@ public class Plant : MonoBehaviour
     [Header("데이터 연결")]
     public int plantId;
 
-    public int health;
+    public float health;
     public float fireRate;
     public bool _canAttack;
 
@@ -84,7 +84,7 @@ public class Plant : MonoBehaviour
         ObjectPoolManager.instance.SpawnFromPool("Pea", transform.position, Quaternion.identity);
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         if (health <= 0)
