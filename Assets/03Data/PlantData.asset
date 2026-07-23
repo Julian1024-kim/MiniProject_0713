@@ -21,6 +21,7 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 3
     canAttack: 1
+    coinPrice: 0
   - id: 2
     name: FastShooter
     health: 50
@@ -29,6 +30,7 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 1
     canAttack: 1
+    coinPrice: 0
   - id: 3
     name: Wallnut
     health: 999999
@@ -37,6 +39,7 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 0
     canAttack: 0
+    coinPrice: 100
   - id: 4
     name: CherryBomb
     health: 50
@@ -45,6 +48,7 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 0
     canAttack: 0
+    coinPrice: 200
   - id: 5
     name: SunFlower
     health: 30
@@ -53,3 +57,4 @@ MonoBehaviour:
     sunCost: 0
     rechargeTime: 0
     canAttack: 0
+    coinPrice: 0

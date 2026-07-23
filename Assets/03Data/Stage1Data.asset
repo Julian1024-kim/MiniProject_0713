@@ -22,3 +22,5 @@ MonoBehaviour:
     spawnInterval: 15
     transitionToNight: 0
     strongZombieInterval: 3
+  stageIndex: 0
+  ClearCoin: 100

@@ -13,9 +13,10 @@ public class PlantInfo
     public float sunCost;        // 심는 데 필요한 태양 개수
     public float rechargeTime; // 재사용 대기시간(초)
     public bool canAttack;     // 호두,체리폭탄용
+    public int coinPrice;
 
 
-    public PlantInfo(int id, string name, float health, float damage, float attackSpeed, float sunCost, float rechargeTime, bool canAttack)
+    public PlantInfo(int id, string name, float health, float damage, float attackSpeed, float sunCost, float rechargeTime, bool canAttack, int coinPrice)
     {
         this.id = id;
         this.name = name;
@@ -25,12 +26,12 @@ public class PlantInfo
         this.sunCost = sunCost;
         this.rechargeTime = rechargeTime;
         this.canAttack = canAttack;
-
+        this.coinPrice = coinPrice;
     }
 
     public PlantInfo Clone()
     {
-        return new PlantInfo(id, name, health, damage, attackSpeed, sunCost, rechargeTime, canAttack);
+        return new PlantInfo(id, name, health, damage, attackSpeed, sunCost, rechargeTime, canAttack,coinPrice);
     }
 }
 

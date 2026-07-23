@@ -30,9 +30,21 @@ public class PlayerInventory : MonoBehaviour
             Debug.Log("이미 보유 중인 카드입니다.");
             return false;
         }
-        ownedPlantIds.Add(plantId);
-        Debug.Log($"식물 ID {plantId} 구매 완료");
-        return true;
+
+        PlantInfo info = GameDataManager.instance.GetPlantInfo(plantId);
+        if (info == null) return false;
+
+        if (CoinManager.instance.SpendCoins(info.coinPrice))
+        {
+            ownedPlantIds.Add(plantId);
+            Debug.Log($"식물 ID {plantId} 구매 완료 (비용: {info.coinPrice} 코인)");
+            return true;
+        }
+        else
+        {
+            Debug.Log("코인이 부족하여 구매할 수 없습니다.");
+            return false;
+        }
     }
 
     public bool IsOwned(int plantId) => ownedPlantIds.Contains(plantId);

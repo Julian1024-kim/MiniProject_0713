@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3149474258304299174}
   - component: {fileID: 56541837723240766}
   - component: {fileID: 8842778322267594808}
+  - component: {fileID: -1833934714871313720}
   m_Layer: 7
   m_Name: Zombie
   m_TagString: Zombie
@@ -189,3 +190,25 @@ MonoBehaviour:
   health: 0
   damage: 0
   attackSpeed: 0
+--- !u!95 &-1833934714871313720
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024439846770975732}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9fc63ab9fb09a404d8510b1a1314affe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

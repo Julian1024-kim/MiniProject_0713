@@ -9,6 +9,7 @@ public class StoreCard : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI plantNameText;
     [SerializeField] TextMeshProUGUI sunCostText;
+    [SerializeField] TextMeshProUGUI coinPriceText;
     [SerializeField] Button buyButton;
     [SerializeField] GameObject owned; // 보유중 표시 오브젝트
 
@@ -24,6 +25,7 @@ public class StoreCard : MonoBehaviour
 
         plantNameText.text = info.name;
         sunCostText.text = $"Sun {info.sunCost}";
+        coinPriceText.text = $"Coin {info.coinPrice} ";
 
         bool owned = PlayerInventory.instance.IsOwned(plantId);
         buyButton.interactable = !owned;
