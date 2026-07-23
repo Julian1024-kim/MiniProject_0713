@@ -189,6 +189,18 @@ public class UIManager : MonoBehaviour
             UpdateStoreUI();
         }
     }
+    public void OnClickRetryButton()
+    {
+
+        if (dim != null) dim.SetActive(false);
+        if (GameOverPanel != null) GameOverPanel.SetActive(false);
+        if (InGameCardManager.instance != null)
+        {
+            InGameCardManager.instance.SetupInGameCards();
+        }
+        StageManager.instance.RestartCurrentStage();
+        CloseAllPanels();
+    }
 
     public void CloseStorePanel()
     {

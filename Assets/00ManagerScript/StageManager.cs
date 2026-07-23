@@ -80,6 +80,40 @@ public class StageManager : MonoBehaviour
             Debug.Log("모든 스테이지 클리어!");
         }
     }
+    public void RestartCurrentStage()
+    {
+        isGameOver = false;
+        Time.timeScale = 1f;
+
+        CleanUpStage();
+
+        if (currentWorld != null)
+        {
+            StartStage(currentStageIndex);
+        }
+    }
+    private void CleanUpStage()
+    {
+        GameObject[] zombies = GameObject.FindGameObjectsWithTag("Zombie");
+        foreach (GameObject zombie in zombies)
+        {
+            zombie.SetActive(false);
+        }
+        GameObject[] plants = GameObject.FindGameObjectsWithTag("Plant");
+        foreach (GameObject plant in plants)
+        {
+            plant.SetActive(false);
+        }
+        GameObject[] suns = GameObject.FindGameObjectsWithTag("Sun");
+        foreach (GameObject sun in suns)
+        {
+            sun.SetActive(false);
+        }
+        if (GridManager.instance != null)
+        {
+            GridManager.instance.ResetAllCells();
+        }
+    }
 
     public void TriggerGameOver()
     {
