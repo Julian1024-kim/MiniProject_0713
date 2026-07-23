@@ -47,7 +47,7 @@ public class StageManager : MonoBehaviour
     //    }
     //    else
     //    {
-    //        Debug.LogError("WorldData가 할당되지 않았거나 스테이지가 비어있습니다!");
+    //        Debug.LogError("WorldData없음");
     //    }
     //}
     public void LoadAndStartStage(WorldData world,int stageIndex)
@@ -85,33 +85,23 @@ public class StageManager : MonoBehaviour
         isGameOver = false;
         Time.timeScale = 1f;
 
-        CleanUpStage();
+        string[] tagsToClean = { "Zombie", "Plant", "Sun" };
+        foreach(string tag in tagsToClean)
+        {
+            GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject obj in objects)
+            {
+                obj.SetActive(false);
+            }
+        }
 
-        if (currentWorld != null)
-        {
-            StartStage(currentStageIndex);
-        }
-    }
-    private void CleanUpStage()
-    {
-        GameObject[] zombies = GameObject.FindGameObjectsWithTag("Zombie");
-        foreach (GameObject zombie in zombies)
-        {
-            zombie.SetActive(false);
-        }
-        GameObject[] plants = GameObject.FindGameObjectsWithTag("Plant");
-        foreach (GameObject plant in plants)
-        {
-            plant.SetActive(false);
-        }
-        GameObject[] suns = GameObject.FindGameObjectsWithTag("Sun");
-        foreach (GameObject sun in suns)
-        {
-            sun.SetActive(false);
-        }
         if (GridManager.instance != null)
         {
             GridManager.instance.ResetAllCells();
+        }
+        if (currentWorld != null)
+        {
+            StartStage(currentStageIndex);
         }
     }
 

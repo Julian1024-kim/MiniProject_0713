@@ -8,18 +8,16 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("패널들")]
-    [SerializeField] GameObject PausePanel;
-    [SerializeField] GameObject SoundPanel;
-    [SerializeField] GameObject GameOverPanel;
-    [SerializeField] GameObject ClearPanel;
-    [SerializeField] GameObject StorePanel;
-    [SerializeField] GameObject PreparePanel;
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject soundPanel;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject clearPanel;
+    [SerializeField] GameObject storePanel;
+    [SerializeField] GameObject preparePanel;
     [SerializeField] Canvas UICanvas;
     [SerializeField] GameObject dim;
-    [SerializeField] GameObject MainMenuPanel;
-    [SerializeField] GameObject StageSelectPanel;
-
-    GameObject optionPanel;
+    [SerializeField] GameObject mainMenuPanel;
+    [SerializeField] GameObject stageSelectPanel;
 
     [Header("일반텍스트")]
     [SerializeField] TextMeshProUGUI rewardCoinText;
@@ -56,10 +54,7 @@ public class UIManager : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (optionPanel == null || !optionPanel.activeSelf)
-            {
-                OpenOptionPanel();
-            }
+                OpenPausePanel();
         }
     }
     public void GameSpeed()
@@ -103,21 +98,21 @@ public class UIManager : MonoBehaviour
     public void OpenMainMenu()
     {
         CloseAllPanels();
-        MainMenuPanel.SetActive(true);
+        mainMenuPanel.SetActive(true);
     }
     public void OpenSelectStage()
     {
         CloseAllPanels();
-        StageSelectPanel.SetActive(true);
+        stageSelectPanel.SetActive(true);
     }
     public void OpenClearPanel(int rewardAmount)
     {
-        if (ClearPanel != null)
+        if (clearPanel != null)
         {
-            ClearPanel.SetActive(true);
+            clearPanel.SetActive(true);
             dim.SetActive(true);
             dim.transform.SetAsLastSibling();
-            ClearPanel.transform.SetAsLastSibling();
+            clearPanel.transform.SetAsLastSibling();
             Time.timeScale = 0f;
         }
 
@@ -133,13 +128,13 @@ public class UIManager : MonoBehaviour
 
     public void OpenStorePanel()
     {
-        if (StorePanel != null)
+        if (storePanel != null)
         {
-            StorePanel.SetActive(true);
+            storePanel.SetActive(true);
             dim.SetActive(true);
 
             dim.transform.SetAsLastSibling();
-            StorePanel.transform.SetAsLastSibling();
+            storePanel.transform.SetAsLastSibling();
 
             UpdateStoreUI();
             Time.timeScale = 0f;
@@ -191,85 +186,75 @@ public class UIManager : MonoBehaviour
     }
     public void OnClickRetryButton()
     {
+        if(pausePanel !=null) pausePanel.SetActive(false);
 
-        if (dim != null) dim.SetActive(false);
-        if (GameOverPanel != null) GameOverPanel.SetActive(false);
-        if (InGameCardManager.instance != null)
-        {
-            InGameCardManager.instance.SetupInGameCards();
-        }
-        StageManager.instance.RestartCurrentStage();
         CloseAllPanels();
+
+        Time.timeScale = 1;
+
+        StageManager.instance.RestartCurrentStage();
     }
 
     public void CloseStorePanel()
     {
-        if (StorePanel != null)
+        if (storePanel != null)
         {
-            StorePanel.SetActive(false);
+            storePanel.SetActive(false);
             dim.SetActive(false);
         }
     }
 
-    public void OpenOptionPanel()
+    public void OpenPausePanel()
     {
-        if (optionPanel == null)
-        {
-            optionPanel = Instantiate(PausePanel, UICanvas.transform);
-            optionPanel.SetActive(true);
-        }
-        else
-        {
-            optionPanel.SetActive(true);
-        }
 
+        pausePanel.SetActive(true);
         dim.SetActive(true);
         dim.transform.SetAsLastSibling();
-        optionPanel.transform.SetAsLastSibling();
+        pausePanel.transform.SetAsLastSibling();
 
         Time.timeScale = 0f;
     }
 
     public void CloseOptionPanel()
     {
-        if (optionPanel != null) optionPanel.SetActive(false);
-        dim.SetActive(false);
+        CloseAllPanels();
 
+        if (!StageManager.instance.isGameOver)
         Time.timeScale = 1f;
     }
 
     public void OpenSoundPanel()
     {
-        SoundPanel.SetActive(true);
-        SoundPanel.transform.SetAsLastSibling();
+        soundPanel.SetActive(true);
+        soundPanel.transform.SetAsLastSibling();
     }
 
     public void OpenGameOverPanel()
     {
-        if (GameOverPanel != null)
+        if (gameOverPanel != null)
         {
-            GameOverPanel.SetActive(true);
+            gameOverPanel.SetActive(true);
             dim.SetActive(true);
             dim.transform.SetAsLastSibling();
-            GameOverPanel.transform.SetAsLastSibling();
+            gameOverPanel.transform.SetAsLastSibling();
         }
     }
   
     public void CloseAllPanels()
     {
-        if (ClearPanel != null) ClearPanel.SetActive(false);
-        if (StorePanel != null) StorePanel.SetActive(false);
-        if (PreparePanel != null) PreparePanel.SetActive(false);
-        if (StageSelectPanel != null) StageSelectPanel.SetActive(false);
-        if (MainMenuPanel !=null) MainMenuPanel.SetActive(false);
+        if (clearPanel != null) clearPanel.SetActive(false);
+        if (storePanel != null) storePanel.SetActive(false);
+        if (preparePanel != null) preparePanel.SetActive(false);
+        if (stageSelectPanel != null) stageSelectPanel.SetActive(false);
+        if (pausePanel !=null) pausePanel.SetActive(false);
+        if (mainMenuPanel !=null) mainMenuPanel.SetActive(false);
+        if (dim!= null) dim.SetActive(false);
     }
 
     public void OpenPreparePanel()
     {
-        PreparePanel.SetActive(true);
-        ClearPanel.SetActive(false);
-        StorePanel.SetActive(false);
-        dim.SetActive(false);
+        CloseAllPanels();
+        preparePanel.SetActive(true);
     }
 
     public void ResetGameData()

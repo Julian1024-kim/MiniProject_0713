@@ -23,7 +23,7 @@ public class StoreCard : MonoBehaviour
         if (info == null) return;
 
         plantNameText.text = info.name;
-        sunCostText.text = $"ÇÞºû {info.sunCost}";
+        sunCostText.text = $"Sun {info.sunCost}";
 
         bool owned = PlayerInventory.instance.IsOwned(plantId);
         buyButton.interactable = !owned;
