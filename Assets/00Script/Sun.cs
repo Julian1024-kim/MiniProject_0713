@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Sun : MonoBehaviour
 {
-    public float dropSpeed = 2f;
+    public float dropSpeed = 1.7f;
     private float stopY;
     private Coroutine disableCoroutine;
     private bool isFalling = true;

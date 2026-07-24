@@ -32,6 +32,12 @@ public class Zombie : MonoBehaviour
     private Coroutine attackCoroutine;
     private Coroutine specialActionCoroutine;
     private bool isPlantInRange = false; // 사거리내 식물존재 여부
+    private Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void OnEnable()
     {
@@ -76,13 +82,16 @@ public class Zombie : MonoBehaviour
             case ZombieState.Walk:
                 StopEatRoutine();
                 break;
+
             case ZombieState.Eat:
-                if (attackCoroutine == null)
-                    attackCoroutine = StartCoroutine(EatRoutine());
+                anim.SetBool("isMoving", false);
+                attackCoroutine = StartCoroutine(EatRoutine());
                 break;
+
             case ZombieState.Action:
                 StopEatRoutine();
                 break;
+
             case ZombieState.Die:
                 StopAllCoroutines();
                 transform.DOKill();
@@ -206,6 +215,7 @@ public class Zombie : MonoBehaviour
         {
             if (targetPlant.gameObject.activeSelf)
             {
+                anim.SetTrigger("attack");
                 SoundManager.instance.PlaySFX(SFXType.Attack);
                 targetPlant.TakeDamage(damage);
                 yield return new WaitForSeconds(attackSpeed);

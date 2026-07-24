@@ -12,7 +12,6 @@ public class SunManager : MonoBehaviour
     public void AddSun(int amount)
     {
         currentSun += amount;
-        Debug.Log($"ÇöÀç ÇÞºû: {currentSun}");
     }
 
     public bool UseSun(float amount)
@@ -20,7 +19,6 @@ public class SunManager : MonoBehaviour
         if (currentSun >= amount)
         {
             currentSun -= amount;
-            Debug.Log($"ÇÞºû »ç¿ë! ³²Àº ÇÞºû: {currentSun}");
             return true;
         }
         return false;

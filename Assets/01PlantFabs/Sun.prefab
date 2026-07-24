@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ab8275dd5cdc044a1d3788c6146957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sun
-  dropSpeed: 2
+  dropSpeed: 1.7
 --- !u!1 &6813605604255714259
 GameObject:
   m_ObjectHideFlags: 0

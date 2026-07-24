@@ -4,7 +4,7 @@ using UnityEngine;
 public class SunSpawner : MonoBehaviour
 {
     public GameObject sunPrefab;
-    public float spawnInterval = 5f;
+    public float spawnInterval = 10f;
     public float xRange = 8f;
     public float ySpawnPos = 6f;
 

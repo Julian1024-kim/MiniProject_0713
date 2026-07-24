@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     [Header("일반텍스트")]
     [SerializeField] TextMeshProUGUI rewardCoinText;
     [SerializeField] TextMeshProUGUI storeCoinText;
+    [SerializeField] TextMeshProUGUI sunText;
+    [SerializeField] TextMeshProUGUI countdownText;
 
     [Header("업그레이드텍스트")]
     [SerializeField] TextMeshProUGUI atkUpgradeText;
@@ -52,6 +54,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        UpdateSunUI();
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
                 OpenPausePanel();
@@ -168,6 +171,27 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    private void UpdateSunUI()
+    {
+        if (sunText != null && SunManager.instance != null)
+        {
+            sunText.text = SunManager.instance.currentSun.ToString();
+        }
+    }
+    public void UpdateCountdownText(string message)
+    {
+        if (countdownText != null)
+        {
+            countdownText.text = message;
+
+            countdownText.transform.localScale = Vector3.one * 1.5f;
+            countdownText.transform.DOScale(1f, 0.5f).SetUpdate(true);
+        }
+    }
+    public void SetActiveCountdown(bool active)
+    {
+        countdownText.gameObject.SetActive(active);
+    }
     public void OnClickUpgradeAtk()
     {
         if(UpgradeManager.instance != null)
@@ -186,9 +210,8 @@ public class UIManager : MonoBehaviour
     }
     public void OnClickRetryButton()
     {
-        if(pausePanel !=null) pausePanel.SetActive(false);
-
-        CloseAllPanels();
+        pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
         Time.timeScale = 1;
 
@@ -215,11 +238,11 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void CloseOptionPanel()
+    public void ClosePausePanel()
     {
-        CloseAllPanels();
+        pausePanel.SetActive(false);
+        dim.SetActive(false);
 
-        if (!StageManager.instance.isGameOver)
         Time.timeScale = 1f;
     }
 
@@ -231,13 +254,11 @@ public class UIManager : MonoBehaviour
 
     public void OpenGameOverPanel()
     {
-        if (gameOverPanel != null)
-        {
             gameOverPanel.SetActive(true);
             dim.SetActive(true);
             dim.transform.SetAsLastSibling();
             gameOverPanel.transform.SetAsLastSibling();
-        }
+        
     }
   
     public void CloseAllPanels()

@@ -33,6 +33,8 @@ public class StageManager : MonoBehaviour
     [Header("게임스테이트")]
     public bool isGameOver = false;
 
+    private Coroutine playStageCoroutine;
+
     void Awake()
     {
         if (instance == null) instance = this;
@@ -61,6 +63,12 @@ public class StageManager : MonoBehaviour
     {
         if (index < currentWorld.stages.Count)
         {
+            if (playStageCoroutine != null)
+            {
+                StopCoroutine(playStageCoroutine);
+            }
+            StopAllCoroutines();//카운트다운텍스트 겹침방지
+
             if (GridManager.instance != null)
             {
                 GridManager.instance.ResetAllCells(); //타일에 재설치안되는증상
@@ -72,8 +80,9 @@ public class StageManager : MonoBehaviour
 
             Time.timeScale = 1;
 
-            Debug.Log($"<color=cyan>--- {currentWorld.worldName} : 스테이지 {index + 1} 시작! ---</color>");
-            StartCoroutine(PlayStageRoutine());
+            UIManager.instance.SetActiveCountdown(false);
+
+            playStageCoroutine = StartCoroutine(PlayStageRoutine());
         }
         else
         {
@@ -121,7 +130,22 @@ public class StageManager : MonoBehaviour
 
     IEnumerator PlayStageRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        UIManager.instance.SetActiveCountdown(true);
+        float timer = 10f;
+
+        while (timer > 0)
+        {
+            UIManager.instance.UpdateCountdownText(Mathf.CeilToInt(timer).ToString());
+
+            yield return new WaitForSeconds(1);
+            timer -= 1f;
+        }
+
+        UIManager.instance.UpdateCountdownText("Zombies Coming!");
+
+        yield return new WaitForSeconds(1.5f);
+
+        UIManager.instance.SetActiveCountdown(false);
 
         foreach (var wave in stageData.waves)
         {
@@ -132,7 +156,7 @@ public class StageManager : MonoBehaviour
 
             Debug.Log($"{wave.waveName} 시작!");
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(4f);
 
             for (int i = 0; i < wave.count; i++)
             {

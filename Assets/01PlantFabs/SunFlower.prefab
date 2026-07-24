@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Bits: 0
   currentCell: {fileID: 0}
   sunPrefab: {fileID: 3927899704709708762, guid: 2d38eb779fd667743badfbfa1d1ba7b6, type: 3}
-  produceInterval: 5
+  produceInterval: 10
   spawnPoint: {fileID: 2919802949788030299}
 --- !u!61 &-3940249979688988499
 BoxCollider2D:
